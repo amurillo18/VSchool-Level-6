@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<!--
+	Astral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>April Murillos Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper-->
+			<div id="wrapper">
+
+				<!-- Nav -->
+					<nav id="nav">
+						<a href="#" class="icon solid fa-home"><span>Home</span></a>
+						<a href="#projects" class="icon solid fa-folder"><span>Projects</span></a>
+						<a href="#about" class="icon solid fa-user"><span>About</span></a>
+						<a href="#contact" class="icon solid fa-envelope"><span>Contact</span></a>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Me -->
+							<article id="home" class="panel intro">
+								<header>
+									<h1>April Murillo</h1>
+									<p>Full Stack Web Developer with IT experience</p>
+								</header>
+								<a href="#projects" class="jumplink pic">
+									<span class="arrow icon solid fa-chevron-right"><span>See my work</span></span>
+									<img src="images/profile.jpeg" alt="" />
+								</a>
+							</article>
+
+						<!-- Work -->
+							<article id="projects" class="panel">
+								<header>
+									<h2>Projects</h2>
+								</header>
+								<p>
+									Phasellus enim sapien, blandit ullamcorper elementum eu, condimentum eu elit.
+									Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+									luctus elit eget interdum.
+								</p>
+								<section>
+									<div class="row">
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic01.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic02.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic03.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic04.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic05.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic06.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic07.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic08.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic09.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic10.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic11.jpg" alt=""></a>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<a href="#" class="image fit"><img src="images/pic12.jpg" alt=""></a>
+										</div>
+									</div>
+								</section>
+							</article>
+							<!-- About -->
+							<article id="about" class="panel">
+								<header>
+									<h2>About Me</h2>
+								</header>
+									<section>
+									<p>Growing up I spent a lot of my time playing chat based roleplaying games where it was necessary to use HTML and CSS to add images and colored text to enhance the gaming experience. I have since earned a Bachelor's Degree of Science in Information Technology at Western Governors University. During my degree program I had a couple of Web Development courses that rekindled my love for coding. I have since enrolled in VSchool, which is a Web Development Bootcamp, to help me gain the skills that I didn't get from degree. My ultimate goal is to become an SME in my industry and I plan to accomplish that by continuing my education through classes or personal experience.</p>
+									<ul>
+										<li>JavaScript</li>
+										<li>ES6</li>
+										<li>React</li>
+										<li>HTML</li>
+										<li>CSS</li>
+										<li>Node.js</li>
+										<li>Express</li>
+										<li>AJAX/HTTP</li>
+										<li>Mongoose</li>
+										<li>MongoDB</li>
+										<li>JSON</li>
+										<li>Git</li>
+									</ul>
+								</section>
+									
+							</article>
+
+						<!-- Contact -->
+							<article id="contact" class="panel">
+								<header>
+									<h2>Contact Me</h2>
+									<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+						<script type="text/javascript">
+							(function() {
+								// https://dashboard.emailjs.com/admin/account
+								emailjs.init('G2rhMG2z7mqnY5hpT');
+							})();
+						</script>
+						<script type="text/javascript">
+							window.onload = function() {
+								document.getElementById('contact-form').addEventListener('submit', function(event) {
+									event.preventDefault();
+									// generate a five digit number for the contact_number variable
+									this.contact_number.value = Math.random() * 100000 | 0;
+									// these IDs from the previous steps
+									emailjs.sendForm('contact_service', 'contact_form', this)
+										.then(function() {
+											console.log('SUCCESS!');
+											alert("Thank you! The form was successfully sent.");
+										}, function(error) {
+											console.log('FAILED...', error);
+										});
+								});
+							}
+						</script>
+								</header>
+								<form id="contact-form">
+									<input type="hidden" name="contact_number">
+									<div>
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<input type="text" name="user_name" placeholder="Name" id="name">
+											</div>
+											<div class="col-6 col-12-medium">
+												<input type="text" name="user_email" placeholder="Email" id="email">
+											</div>
+											<div class="col-12">
+												<textarea name="message" placeholder="Message" id="message"></textarea>
+											</div>
+											<div class="col-12">
+												<ul class="actions">
+													<li><input type="submit" value="Send Message"></li>	
+												</ul>
+											</div>
+										</div>
+									</div>
+								</form>
+							
+									<li><a href="https://github.com/amurillo18" class="icon brands fa-github"></a></li>
+									<li><a href="www.linkedin.com/in/april-murillo" class="icon brands fa-linkedin-in"></a></li>
+								
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<div id="footer">
+						<ul class="copyright">
+							<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
