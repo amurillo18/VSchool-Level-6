@@ -19,7 +19,7 @@ function IssueForm(props){
 
   function handleSubmit(e){
     e.preventDefault()
-    addTodo(inputs)
+    addIssue(inputs)
     setInputs(initInputs)
   }
 

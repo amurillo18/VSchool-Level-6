@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Issue(props){
-  const { title, description, likedUsers, dislikedUsers,_id } = props
+  const { title, description, likedUsers, dislikedUsers, _id } = props
   return (
     <div className="issue">
       <h1>{ title }</h1>

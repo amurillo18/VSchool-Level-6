@@ -3,6 +3,7 @@ const app = express()
 const morgan = require("morgan")
 const mongoose = require("mongoose")
 const {expressjwt} = require('express-jwt')
+require('dotenv').config()
 
 const port = process.env.PORT || 4000;
 
@@ -13,7 +14,7 @@ mongoose.set('strictQuery', true)
 mongoose.connect("mongodb+srv://Amurillo:Alex2015@cluster0.uvmcw4x.mongodb.net/RockTheVotedb?retryWrites=true&w=majority", () => console.log('connected to database'))
 
 app.use("/auth", require('./routes/authRouter'))
-app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] })) // req.user
+app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] })) 
 app.use("/api/issue", require('./routes/issueRouter'))
 
 app.use((err, req, res, next) => {

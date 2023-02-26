@@ -13,13 +13,14 @@ userAxios.interceptors.request.use(config => {
 
 function UserProvider(props) {
     const initState = {
-        user: {}, 
-        token: "", 
-        issues: []
+        user: JSON.parse(localStorage.getItem("user")) || {}, 
+        token: localStorage.getItem("token") || "", 
+        issues: [],
+        errMsg: ""
     }
 
-    const {userstate, setUserState} = useState(initState)
-    const {allIssues, setAllIssues} = useState([])
+    const [userstate, setUserState] = useState(initState)
+    const [allIssues, setAllIssues] = useState([])
 
     function signup(credentials){
         axios.post("/auth/signup", credentials)
@@ -33,11 +34,11 @@ function UserProvider(props) {
                     token
                 }))
             })
-            .catch(err => handleAuthErr(err.response.data.errMsg))
+            .catch(err => handleAuthError(err.response.data.errMsg))
     }
 
     function login(credentials){
-        axios.post("/auth/signup", credentials)
+        axios.post("/auth/login", credentials)
             .then(res => {
                 const {user, token} = res.data
                 localStorage.setItem('token', token)
@@ -92,6 +93,20 @@ function UserProvider(props) {
         })
         .catch(err => console.dir(err.response.data.errMsg))
     }
+
+    function handleAuthError(errMsg){
+        setUserState(prevState => ({
+          ...prevState,
+          errMsg
+        }))
+      }
+    
+      function resetAuthError(){
+        setUserState(prevState => ({
+          ...prevState,
+          errMsg: ""
+        }))
+      }
 
     return(
         <UserContext.Provider
