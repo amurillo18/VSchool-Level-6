@@ -16,6 +16,7 @@ mongoose.connect("mongodb+srv://Amurillo:Alex2015@cluster0.uvmcw4x.mongodb.net/R
 app.use("/auth", require('./routes/authRouter'))
 app.use('/api', expressjwt({ secret: process.env.SECRET, algorithms: ['HS256'] })) 
 app.use("/api/issue", require('./routes/issueRouter'))
+app.use("/api/issue/comment", require('./routes/commentRouter'))
 
 app.use((err, req, res, next) => {
     console.log(err)

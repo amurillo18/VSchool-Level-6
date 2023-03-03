@@ -2,10 +2,22 @@ import React from 'react'
 import Issue from './Issue'
 
 function IssueList(props){
-  const { issues } = props
+  
+  const { issues, comments } = props
+  console.log(comments)
   return (
     <div className="issue-list">
-      { issues.map(issue => <Issue {...issue} key={issue._id}/>) }
+      { issues.sort((a, b) => { // goes through and sorts based on which one has a greater length of likes
+        let bTotal = b.likeDislike.filter(item => item.likeDislike === true).length
+        let aTotal = a.likeDislike.filter(item => item.likeDislike === true).length
+        return bTotal - aTotal 
+      }).map(issue => 
+          <Issue 
+            issue={ issue } 
+            key={ issue._id }
+            comments={comments}
+          />
+        )}
     </div>
   )
 }

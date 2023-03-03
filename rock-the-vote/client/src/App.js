@@ -1,6 +1,6 @@
 import './App.css';
 import {Routes, Route, Navigate} from 'react-router-dom'
-import {useContext} from 'react'
+import {useContext, useEffect} from 'react'
 import {UserContext } from './context/UserProvider'
 import Navbar from './components/Navbar'
 import Profile from './components/Profile'
@@ -9,7 +9,12 @@ import Auth from './components/Auth'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
-  const { token, logout, user} = useContext(UserContext)
+  const { token, logout, allIssues, upKeepIssues,likeIssue, dislikeIssue, addComment, comments} = useContext(UserContext)
+
+  useEffect(()=>{
+    upKeepIssues()
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <div className="App">
@@ -21,15 +26,21 @@ function App() {
       <Route 
           path="/profile"
           element={
-          <ProtectedRoute token={token} redirectTo="/">
+          <ProtectedRoute token={token} >
           <Profile/>
         </ProtectedRoute>}
         />
         <Route 
-          path="/public"
+          path="/issues"
           element={
-          <ProtectedRoute token={token} redirectTo="/">
-          <Public/>
+          <ProtectedRoute token={token} >
+          <Public 
+          allIssues={allIssues} 
+          upKeepIssues={upKeepIssues} 
+          likeIssue={likeIssue} 
+          dislikeIssue={dislikeIssue} 
+          addComment={addComment}
+          comments={comments}/>
         </ProtectedRoute>}
         />
      </Routes>

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const initInputs = {
   title: "",
   description: ""
-}
+} 
 
 function IssueForm(props){
   const [inputs, setInputs] = useState(initInputs)
@@ -23,10 +23,9 @@ function IssueForm(props){
     setInputs(initInputs)
   }
 
-  const { title, description } = inputs
+  const { title, description} = inputs
   return (
     <form onSubmit={handleSubmit}>
-        <h3>New Issue</h3>
       <input 
         type="text" 
         name="title" 
@@ -38,9 +37,7 @@ function IssueForm(props){
         name="description" 
         value={description} 
         onChange={handleChange} 
-        placeholder="Description"
-        rows='15'
-        />
+        placeholder="Description"/>
       <button>Add Issue</button>
     </form>
   )

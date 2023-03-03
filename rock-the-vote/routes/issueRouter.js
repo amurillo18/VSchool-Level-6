@@ -1,73 +1,119 @@
 const express = require("express")
 const issueRouter = express.Router()
-const post = require("../models/Issue")
+const Issue = require("../models/Issue")
 
 // get all
 issueRouter.get('/',(req, res, next) => {
-    post.find((err, posts) => {
+    Issue.find((err, issues) => {
         if(err){
             res.status(500)
             return next(err)
         }
-        return res.status(200).send(posts)
+        return res.status(200).send(issues)
     })
 })
 
 //get by user
-issueRouter.get('/userId',(req, res, next) => {
-    post.find({userId: req.auth._id},(err, posts) => {
+issueRouter.get('/user', (req, res, next) => {
+    Issue.find({user: req.auth._id}, (err, issues) => {
         if(err){
             res.status(500)
             return next(err)
         }
-        return res.status(200).send(posts)
+        return res.status(200).send(issues)
     })
 })
 
 // add new
 issueRouter.post('/',(req, res, next) => {
     req.body.user = req.auth._id
-    const newPost = new post(req.body)
-    newPost.save((err, savedPost) => {
+    const newIssue = new Issue(req.body)
+    newIssue.save((err, savedIssue) => {
         if(err){
             res.status(500)
             return next(err)
         } 
-        return res.status(201).send(savedPost)
+        return res.status(201).send(savedIssue)
     })
 })
 
 // delete
 issueRouter.delete('/:issueId',(req, res, next) => {
-    post.findOneAndDelete(
+    Issue.findOneAndDelete(
         {_id: req.params.issueId, user: req.auth._id},
-        (err, deletedPost) => {
+        (err, deletedIssue) => {
             if(err){
                 res.status(500)
                 return next(err)
             } 
-            return res.status(200).send(`${deletedPost.title} has been deleted`)
+            return res.status(200).send(`${deletedIssue.title} has been deleted`)
         }
     )
 })
 
 // update
 issueRouter.put('/:issueId',(req, res, next) => {
-    post.findOneAndUpdate(
+    Issue.findOneAndUpdate(
         {_id: req.params.issueId, user: req.auth._id},
         req.body,
         {new: true},
-        (err, updatedPost) => {
+        (err, updatedIssue) => {
             if(err){
                 res.status(500)
                 return next(err)
             } 
-            return res.status(201).send(updatedPost)
+            return res.status(201).send(updatedIssue)
         }
     )
 })
 
 // like
+issueRouter.put(`/like/:issueId`, (req, res, next) => {
+    Issue.findOneAndUpdate(
+        {_id: req.params.issueId},
+        {$addToSet: {likedUsers: req.auth._id},
+        $pull: {dislikedUsers: req.auth._id}}, 
+        {new: true},
+        (err, updatedIssue) =>{
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201). send(updatedIssue)
+        }
+    )
+})
 // dislike
+issueRouter.put(`/dislike/:issueId`, (req, res, next) => {
+    Issue.findOneAndUpdate(
+        {_id: req.params.issueId},
+        {$addToSet: {dislikedUsers: req.auth._id},
+        $pull: {likedUsers: req.auth._id}}, 
+        {new: true},
+        (err, updatedIssue) =>{
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201). send(updatedIssue)
+        }
+    )
+})
+
+issueRouter.post('/:issueId/comments', (req,res,next) => {
+    const { issue, comment } = req.body
+    //console.log(issue, comment, req.user._id)
+    Issue.findOneAndUpdate(
+        {_id: issue}, { $push : {comment: {issue: issue, user: req.auth._id, comment: comment}}},
+        {new: true},
+        (err, newComment) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201).send(newComment)
+            }
+        )
+    })
 
 module.exports = issueRouter

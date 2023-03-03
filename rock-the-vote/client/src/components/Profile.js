@@ -1,29 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext} from 'react'
 import IssueForm from './IssueForm'
-import IssueList from './IssueList'
-//import Issue from './Issue'
+import UserIssueList from './UserIssueList'
 import { UserContext } from '../context/UserProvider'
+//import CommentContext from '../context/CommentProvider'
 
 function Profile(){
 
-    const { 
-        user: { 
-          username 
-        }, 
-        addIssue, 
-        issues 
-      } = useContext(UserContext)
-    
-      return (
-        <div className="profile">
-          <h1>Welcome {username}!</h1>
-          <h3>Add An Issue</h3>
-          <IssueForm addIssue={addIssue}/>
-          <h3>Your Issues</h3>
-          <IssueList issues={issues}/>
-        </div>
-      )
+  const { 
+    user: { username }, 
+    addIssue,  
+    issues
+  } = useContext(UserContext)
 
+
+    
+  return (
+    <div className="profile">
+      <div className="form">
+        <h1 className="text-primary">Welcome {username}!</h1>
+        <h3 className="text-secondary">Add An Issue</h3>
+        <IssueForm 
+          addIssue={addIssue}
+        />        
+        <h3 className="text-primary">Your Issue</h3>
+      </div>
+      <UserIssueList 
+        issues={issues}
+      />
+    </div>
+  )
 }
 
 export default Profile

@@ -26,7 +26,19 @@ const issueSchema = new Schema({
     dislikedUsers: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }],
+    likeIssue:{
+        type: Array
+    },
+    dislikeIssue: {
+        type: Array
+    },
+    comments: [
+        {
+          type: mongoose.Schema.Types.Array,
+          ref: "Comment"
+        },
+      ]
 })
 
 module.exports = mongoose.model("Issue", issueSchema)
