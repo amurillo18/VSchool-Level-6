@@ -150,7 +150,7 @@ function UserProvider(props) {
     
     
     const addComment = (issueId, newComment) => {
-        userAxios.post(`/api/issue/${issueId}/comments`, newComment)
+        userAxios.post(`/api/issue/comment/${issueId}`, newComment)
         .then((response) => setComments(response.data))
         .catch(err => console.log(err))
     }
