@@ -33,12 +33,11 @@ const issueSchema = new Schema({
     dislikeIssue: {
         type: Array
     },
-    comments: [
-        {
-          type: mongoose.Schema.Types.Array,
-          ref: "Comment"
-        },
-      ]
+    comment: {
+        type: Schema.Types.Array,
+        ref: "Comment",
+        required: false
+      }
 })
 
 module.exports = mongoose.model("Issue", issueSchema)

@@ -4,21 +4,22 @@ const Comment = require("../models/Comment")
 //const User = require("../models/User")
 const Issue = require('../models/Issue')
 
-// add a comment
-// commentRouter.post("/:issueId/", (req,res,next) => {
-//     const newComment = new Comment(req.body)
-//     Issue.findByIdAndUpdate(
-//         {_id: req.params.issueId, user: req.auth._id},
-//         { $addToSet: {comments: {comment: newComment, user: req.auth._id}}},
-//         {new: true}
-//     ).populate("comments").exec((err, populatedIssues)=> {
-//         if(err){
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(201).send(populatedIssues)
-//     })
+// add a  comment
+commentRouter.post('/:issueId', (req,res,next) => {
+    req.body.user = req.auth._id
+    req.body.issue = req.params.issueId
     
+    const newComment = new Comment(req.body)
+    newComment.save((err, savedComment) => {
+        if(err) {
+            res.status(500)
+            return next(err)
+        }
+            return res.status(201).send(savedComment)
+        })
+    })
+
+
     // get all comments
     commentRouter.get("/", (req, res, next) => {
         Comment.find((err, comments) => {
@@ -29,21 +30,5 @@ const Issue = require('../models/Issue')
             return res.send(comments)
         })
     })
-
-    commentRouter.post('/:issueId', (req,res,next) => {
-        const { issue, comment } = req.body
-        //console.log(issue, comment, req.user._id)
-        Issue.findOneAndUpdate(
-            {_id: issue}, { $push : {comment: {issue: issue, user: req.auth._id, comment: comment}}},
-            {new: true},
-            (err, newComment) => {
-                if(err){
-                    res.status(500)
-                    return next(err)
-                }
-                return res.status(201).send(newComment)
-                }
-            )
-        })
 
 module.exports = commentRouter

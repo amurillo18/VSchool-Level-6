@@ -1,4 +1,5 @@
-import React, {  useState } from "react";
+import React, {  useContext, useState } from "react";
+import { UserContext } from "../context/UserProvider";
 //import { UserContext } from "../context/UserProvider";
 
 
@@ -8,7 +9,16 @@ const initInputs = {
 
 function CommentForm(props){
     const [inputs, setInputs] = useState(initInputs)
-    const { addComment } = props
+    const { addComment } = useContext(UserContext)
+
+    const {_id} = props
+
+    console.log(_id, "id")
+
+  //   const commentData = {
+  //     inputs,
+  //     issueId: _id
+  // }
 
     function handleChange(e){
         const {name, value} = e.target
@@ -16,11 +26,12 @@ function CommentForm(props){
           ...prevInputs,
           [name]: value
         }))
+    
       }
 
       function handleSubmit(e){
         e.preventDefault()
-        addComment(inputs)
+        addComment(_id, inputs)
         setInputs(initInputs)
       }
 

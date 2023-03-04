@@ -138,21 +138,53 @@ function UserProvider(props) {
         getAllIssues()
         getComments()
     }
-// adding on commenting
+
+    function deleteIssue(issueId) {
+        userAxios.delete(`/api/issue/${issueId}`)
+            .then(res => setUserState(prevState => ({
+                ...prevState,
+                issues: prevState.issues.filter(issue => issue._id !== issueId)
+            })))
+            .catch(err => console.log(err)
+            )
+        return getUserIssues()
+    }
+
+    function updateIssue(updates, issueId) {
+        userAxios.put(`api/issue/${issueId}`, updates)
+        .then(res => setUserState(prevState => ({
+            ...prevState,
+            issues: prevState.issues.map(issue => issue._id !== issueId ? issue : res.data)
+        })))
+
+        .catch(err => console.log(err))
+        return getUserIssues()
+    }
+
+    // adding on commenting
 
     const[comments, setComments] = useState([])
 
-    function getComments(id){
-        userAxios.get(`/api/issue/comment/`)
+    function getComments(){
+        userAxios.get(`/api/issue/comment`)
         .then(res => setComments(res.data))
         .catch(err => console.dir(err.response.data.errMsg))
     }
+
     
     
     const addComment = (issueId, newComment) => {
         userAxios.post(`/api/issue/comment/${issueId}`, newComment)
         .then((response) => setComments(response.data))
-        .catch(err => console.log(err))
+        // .catch(err => console.log(err))
+        //userAxios.post(`/api/issue/comment/${issueId}`, newComment)
+        // .then(res => {
+        //     setUserState(prevState => ({
+        //         ...prevState, 
+        //         issue: [...prevState.issues.map(issue => issue._id === issueId ? res.data : issue)]
+        //     }))
+        // })
+        .catch(err => console.log(err.response.data.errMsg))
     }
 
     // function editComment(commentId, updateComment){
@@ -178,7 +210,9 @@ function UserProvider(props) {
             upKeepIssues,
             comments,
             getComments,
-            addComment
+            addComment,
+            deleteIssue,
+            updateIssue
             //editComment
             
         }}>

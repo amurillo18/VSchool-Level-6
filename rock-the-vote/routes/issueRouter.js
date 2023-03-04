@@ -100,20 +100,5 @@ issueRouter.put(`/dislike/:issueId`, (req, res, next) => {
     )
 })
 
-// issueRouter.post('/:issueId/comments', (req,res,next) => {
-//     const { issue, comment } = req.body
-//     //console.log(issue, comment, req.user._id)
-//     Issue.findOneAndUpdate(
-//         {_id: issue}, { $push : {comment: {issue: issue, user: req.auth._id, comment: comment}}},
-//         {new: true},
-//         (err, newComment) => {
-//             if(err){
-//                 res.status(500)
-//                 return next(err)
-//             }
-//             return res.status(201).send(newComment)
-//             }
-//         )
-//     })
 
 module.exports = issueRouter

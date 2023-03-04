@@ -3,8 +3,8 @@ import Issue from './Issue'
 
 function IssueList(props){
   
-  const { issues, comments } = props
-  console.log(comments)
+  const { issues } = props
+  
   return (
     <div className="issue-list">
       { issues.sort((a, b) => { // goes through and sorts based on which one has a greater length of likes
@@ -15,7 +15,7 @@ function IssueList(props){
           <Issue 
             issue={ issue } 
             key={ issue._id }
-            comments={comments}
+            // comments={comments}
           />
         )}
     </div>
