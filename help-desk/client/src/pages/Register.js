@@ -43,9 +43,6 @@ function Register() {
       dispatch(register(userData))
         .unwrap()
         .then((user) => {
-          // NOTE: by unwrapping the AsyncThunkAction we can navigate the user after
-          // getting a good response from our API or catch the AsyncThunkAction
-          // rejection to show an error message
           toast.success(`Registered new user - ${user.name}`)
           navigate('/')
         })

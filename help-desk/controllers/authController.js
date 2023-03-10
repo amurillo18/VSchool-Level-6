@@ -17,7 +17,7 @@ const registerUser = asyncHandler(async(req, res) => {
     const  userExists = await User.findOne({email})
 
     if(userExists){
-        res.status(400)
+        res.status(403)
         throw new Error("There's already an account with that email address")
     }
     // hash password
@@ -57,7 +57,7 @@ const loginUser = asyncHandler(async(req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(401)
+        res.status(403)
         throw new Error("Invalid username or password")
     }
 })
@@ -75,7 +75,7 @@ const currentUser = asyncHandler(async(req, res) => {
 // generate token
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: '30d'
+        expiresIn: '1d'
     })
 } 
 

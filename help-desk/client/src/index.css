@@ -1,10 +1,9 @@
 
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap'); */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #BF9DCB;
 }
 
 body {
@@ -69,7 +68,7 @@ h3 {
 }
 
 .header ul li a:hover {
-  color: #777;
+  color: #FFE5C3;
 }
 
 .header ul li a svg {
@@ -84,7 +83,7 @@ h3 {
 }
 
 .heading p {
-  color: #828282;
+  color: #F9FDC1;
 }
 
 .boxes {
@@ -108,7 +107,7 @@ h3 {
 }
 
 .boxes a:hover {
-  color: #777;
+  color: #FFE5C3;
 }
 
 .form {
@@ -129,6 +128,7 @@ h3 {
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: inherit;
+  background-color: whitesmoke;
 }
 
 .form-group label {
@@ -225,6 +225,7 @@ h3 {
 
 .ticket-headings {
   font-weight: 700;
+  background-color: whitesmoke;
 }
 
 .status {
@@ -283,6 +284,12 @@ h3 {
   border: 1px #ccc solid;
   padding: 10px 15px;
   border-radius: 5px;
+}
+.tickets,
+.ticket-headings div,
+.ticket-date,
+.ticket-product {
+  background-color: whitesmoke;
 }
 
 .note {
